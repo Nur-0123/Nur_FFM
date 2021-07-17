@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "b5c3a7b9-062e-40f4-a827-00f8d5053a92",
+		"name": "FFM OT_Member",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create FFM platform",
+			"item": [
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "OT Member should not be able to Register without email address",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\",\n    \"password\": \"Jone01\",\n    \"firstname\": \"Jone\",\n    \"lastname\": \"Fitcher\",\n    \"username\": \"Fitcherx\"\n}"
+								},
+								"url": {
+									"raw": "{{serverAddress}}/api/v1/field-force/auth/register-admin-user",
+									"host": [
+										"{{serverAddress}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"field-force",
+										"auth",
+										"register-admin-user"
+									]
+								},
+								"description": "Object: As a tester I should not be able to register OT member without email address\nSE:\nPO:\nTester:\n\nExpected Result: Ot member should not be registered without email address\nTest Data:{\n    \"email\": \"\",\n    \"password\": \"Jone01\",\n    \"firstname\": \"Jone\",\n    \"lastname\": \"Fitcher\",\n    \"username\": \"Fitcherx\"\n}\nActual Result: As a tester, I was not able to register OT member without email\n\nTest Result:\n    \"message\": [\n        \"email must be non-empty\"\n    ],\n    \"status\": \"failed\"\n}\n\nStatus Code: 403 Forbidden\nTest Status: Pass"
+							},
+							"response": []
+						},
+						{
+							"name": "Ot member should not be resgitered without email,first name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\",\n    \"password\": \"Jone01\",\n    \"firstname\": \"\",\n    \"lastname\": \"Fitcher\",\n    \"username\": \"Fitcherx\"\n}"
+								},
+								"url": {
+									"raw": "{{serverAddress}}/api/v1/field-force/auth/register-admin-user",
+									"host": [
+										"{{serverAddress}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"field-force",
+										"auth",
+										"register-admin-user"
+									]
+								},
+								"description": "Object: As a tester I should not be able to register OT member without email address and first name\nSE:\nPO:\nTester:\n\nExpected Result: Ot member should not be registered without email address and first name\n\nTest Data:{\n    \"email\": \"\",\n    \"password\": \"Jone01\",\n    \"firstname\": \"\",\n    \"lastname\": \"Fitcher\",\n    \"username\": \"Fitcherx\"\n}\nActual Result: As a tester, I was not able to register OT member without email and first name\n\nTest Result:\n   \n    \"message\": [\n        \"email must be non-empty\",\n        \"firstname must be non-empty\"\n    ],\n    \"status\": \"failed\"\n}\n\nStatus Code: 403 Forbidden\nTest Status: Pass"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "http://96.85.103.141:6001/api/v1/field-force/auth/register-admin-user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "*/*"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"Jone01\",\n    \"firstname\": \"Jone\",\n    \"lastname\": \"Fitcher\",\n    \"username\": \"{{randomusername}}\"\n}"
+								},
+								"url": {
+									"raw": "{{serverAddress}}/api/v1/field-force/auth/register-admin-user",
+									"host": [
+										"{{serverAddress}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"field-force",
+										"auth",
+										"register-admin-user"
+									]
+								},
+								"description": "Objective:As a tester I should be able to register OT member with email, password, first name, last name and username.\n\nSE: name\nPO: Pranto\nTester: Nur\n\nExpected Result: As a tester I should be able to register OT member\n\nTest Data:{\n    \"email\": \"Jone@email.com\",\n    \"password\": \"Jone01\",\n    \"firstname\": \"Jone\",\n    \"lastname\": \"Fitcher\",\n    \"username\": \"Fitcherx\"\n}\n\nActaul Result: I was able to register OT member\nTest Result:\n\n\nStatus Code: 201 Created\nTest Status: Pass"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
